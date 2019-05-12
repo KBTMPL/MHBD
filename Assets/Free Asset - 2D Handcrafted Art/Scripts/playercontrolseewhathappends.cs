@@ -12,22 +12,12 @@ namespace Scripts
         [SerializeField] private AudioSource audio;
         [SerializeField] private AudioClip[] stepSounds;
         [SerializeField] private AudioClip[] jumpSounds;
-        [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private Animator animator;
         [SerializeField] private string name;
         private float timeElapsed;
         private float delayBeforeScene = 1f;
     
         public bool attack;
-        // Use this for initialization
-
-        /*void Awake () 
-    {
-        spriteRenderer = GetComponent<SpriteRenderer> (); 
-        animator = GetComponent<Animator> ();
-    }*/
-    
-
         protected override void ComputeVelocity()
         {
             Vector2 move = Vector2.zero;
@@ -67,6 +57,7 @@ namespace Scripts
             targetVelocity = move * maxSpeed;
         
         }
+
 
         protected override void Attack()
         {

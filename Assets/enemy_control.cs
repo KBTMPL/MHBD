@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Scripts;
 using UnityEditor;
 using UnityEngine;
+using UnityEditor;
 
 public class enemy_control :   MonoBehaviour
 {
@@ -15,17 +16,22 @@ public class enemy_control :   MonoBehaviour
     private bool attack;
     private string name;
     [SerializeField] protected HealthBar healthBar;
+    [SerializeField] private Animator animator;
 
 
     private void Start()
     {
         healthAmount = 1f;
-        healthBar.SetSize(1f);
+        //healthBar.SetSize(healthAmount);
     }
 
     private void Update()
     {
-        transform.Translate(Vector2.right*speed*Time.deltaTime);
+ 
+
+        //transform.Translate(Vector2.right*speed*Time.deltaTime);
+        transform.Translate(UnityEngine.Vector2.right * speed * Time.deltaTime);
+        //RaycastHit2D groundInfo = Physics2D.Raycast(.position, Vector2.down, distance);
         RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
         if (groundInfo.collider == false)
         {
@@ -45,7 +51,15 @@ public class enemy_control :   MonoBehaviour
         
         if (healthAmount <= 0)
         {
-            Destroy (gameObject);
+            Destroy(healthBar);
+            
+            if (animator)
+            {
+                animator.SetBool("dead", true);
+                
+                StartCoroutine(WaitAndPlay());
+
+            }
         }
             
     }
@@ -73,4 +87,12 @@ public class enemy_control :   MonoBehaviour
         }
         
     }
+    
+    private IEnumerator WaitAndPlay()
+    {
+        yield return new WaitForSeconds(1f);
+        //sceneLoader.LoadScene("Scores");
+        Destroy(gameObject);
+    }
+
 }

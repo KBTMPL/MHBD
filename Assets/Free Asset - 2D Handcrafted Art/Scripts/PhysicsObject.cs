@@ -32,7 +32,7 @@ public class PhysicsObject : MonoBehaviour {
     void Start ()
     {
         healthAmount = 1f;
-        healthBar.SetSize(1f);
+   //     healthBar.SetSize(1f);
         
         contactFilter.useTriggers = false;
         contactFilter.SetLayerMask (Physics2D.GetLayerCollisionMask (gameObject.layer));
