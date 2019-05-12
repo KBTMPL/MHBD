@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(HealthBar))]
 public class PhysicsObject : MonoBehaviour {
 
     public float minGroundNormalY = .65f;
@@ -16,7 +17,7 @@ public class PhysicsObject : MonoBehaviour {
     protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
     protected List<RaycastHit2D> hitBufferList = new List<RaycastHit2D> (16);
     protected bool dead;
-
+    [Range(0,1)]
     public static float healthAmount;
 
 

@@ -3,6 +3,8 @@ using Random = UnityEngine.Random;
 
 namespace Scripts
 {
+   
+    [RequireComponent(typeof(Animator))]
     public class playercontrolseewhathappends : PhysicsObject {
 
         public float maxSpeed = 7;
@@ -16,11 +18,15 @@ namespace Scripts
         [SerializeField] private string name;
         private float timeElapsed;
         private float delayBeforeScene = 1f;
-    
         public bool attack;
+        
+        
+
+        
         protected override void ComputeVelocity()
         {
             Vector2 move = Vector2.zero;
+            //GameObject.FindGameObjectsWithTag("player");
 
             move.x = Input.GetAxis ("Horizontal");
 
@@ -48,7 +54,6 @@ namespace Scripts
                     
                     if(timeElapsed >= delayBeforeScene)
                         UnityEngine.SceneManagement.SceneManager.LoadScene("game_over");
-
 
                 }
                    
@@ -98,6 +103,7 @@ namespace Scripts
                 if (move.x > 0.01f)
                 {
                     graphic.transform.localScale = new Vector3(0.1f, transform.localScale.y, transform.localScale.z);
+                    
 
 
                     if (graphic.transform.localScale.x == -0.1f)
@@ -128,20 +134,39 @@ namespace Scripts
         {
             if (!audio) return;
             audio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)]);
-            Debug.Log("play jumpSounds");
+            //Debug.Log("play jumpSounds");
 
         }
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.gameObject.name.Equals("Enemy"))
-            {
+           // if (col.gameObject.name.Equals("Enemy"))
+            //if (GameObject.FindGameObjectWithTag("enemy") )
+            if (col.tag.Equals("enemy") )
+            {  
                 healthAmount -= 0.1f;
-                Debug.Log("masz mniej życia!");
+               // Debug.Log("masz mniej życia!");
             
             }
+
+            if (col.tag.Equals("healthPotion"))
+            {
+                if (healthAmount <= 0.6f)
+                {
+                  healthAmount += 0.4f;  
+                }
+                else
+                {
+                    healthAmount = 1;
+                }
+                
+                Destroy(col.gameObject);
+            }
+            
+            
         }
-    
+
+
     }
 }
 

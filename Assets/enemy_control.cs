@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts;
 using UnityEditor;
 using UnityEngine;
@@ -17,12 +18,14 @@ public class enemy_control :   MonoBehaviour
     private string name;
     [SerializeField] protected HealthBar healthBar;
     [SerializeField] private Animator animator;
+    public GameObject[] healthbarr1;
 
 
     private void Start()
     {
         healthAmount = 1f;
         //healthBar.SetSize(healthAmount);
+        healthbarr1 = GameObject.FindGameObjectsWithTag("HealthBar");// nie może tak być -> kazdy pasek z tym tagiem znika !
     }
 
     private void Update()
@@ -46,12 +49,18 @@ public class enemy_control :   MonoBehaviour
                 movingRight = true;
             }
         }
-        
-        healthBar.SetSize(healthAmount);
-        
-        if (healthAmount <= 0)
+
+        if (gameObject)
         {
-            Destroy(healthBar);
+                    healthBar.SetSize(healthAmount);
+
+        }
+        
+        if (healthAmount <= 0.001)
+            
+        {
+           Debug.Log("masz 0000000000000życia ");
+               
             
             if (animator)
             {
@@ -68,7 +77,7 @@ public class enemy_control :   MonoBehaviour
     {
         attack = player.isAttacking();
         name = player.getName();
-        Debug.Log(name +"   "+ attack +" "+ healthAmount);
+       // Debug.Log(name +"   "+ attack +" "+ healthAmount);
         if (name == "Rogue_01" && attack) //col.gameObject.animation.Equals("attack")  )  col.gameObject.name.Equals("Rogue_01")
         {
             healthAmount -= 0.2f;
@@ -80,7 +89,7 @@ public class enemy_control :   MonoBehaviour
     {
         attack = player.isAttacking();
         name = player.getName();
-        Debug.Log(name +"   "+ attack +" "+ healthAmount);
+//        Debug.Log(name +"   "+ attack +" "+ healthAmount);
         if (name == "Rogue_01" && attack) //col.gameObject.animation.Equals("attack")  )  col.gameObject.name.Equals("Rogue_01")
         {
             healthAmount -= 0.2f;

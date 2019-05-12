@@ -22,7 +22,10 @@ public class HealthBar : MonoBehaviour
 
     public void SetSize(float sizeNormalized)
     {
-        bar.localScale = new Vector3(sizeNormalized,1f);
+        if (bar)
+        {
+                    bar.localScale = new Vector3(sizeNormalized,1f);
+        }
     }
     
 }
