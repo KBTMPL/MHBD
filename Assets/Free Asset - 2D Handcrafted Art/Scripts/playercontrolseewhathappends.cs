@@ -14,8 +14,10 @@ namespace Scripts
         [SerializeField] private AudioSource audio;
         [SerializeField] private AudioClip[] stepSounds;
         [SerializeField] private AudioClip[] jumpSounds;
+        [SerializeField] private AudioClip[] attackSounds;
         [SerializeField] private Animator animator;
         [SerializeField] private string name;
+        private AnimationClip attack_clip;
         private float timeElapsed;
         private float delayBeforeScene = 1f;
         public bool attack;
@@ -32,7 +34,7 @@ namespace Scripts
 
             if (Input.GetButtonDown ("Jump") && grounded) {
                 velocity.y = jumpTakeOffSpeed;
-                Jump();
+                playJumpSound();
 
             } else if (Input.GetButtonUp ("Jump")) 
             {
@@ -70,8 +72,32 @@ namespace Scripts
 
             if (animator){
                 animator.SetBool("attack",attack);
+                animator.speed = 2f; //xDDDDDD działa ale na wszystkie animacje
+                //animator.ge = 2f; 
+                attack_clip = GetAnimationClip("Rogue_attack_01"); //to i ta funkcja i zmiennaasdfghjkl
+               
+
             }
+
+            if (attack)
+            {
+                playAttackSound(); 
+            }
+            
         }
+        
+        public AnimationClip GetAnimationClip(string name) {
+            if (!animator) return null; // no animator
+ 
+            foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips) {
+                if (clip.name == name) {
+                    return clip;
+                }
+            }
+            return null; // no clip by that name
+        }
+
+       
 
         public bool isAttacking()
         {
@@ -130,13 +156,19 @@ namespace Scripts
 
         }
 
-        private void Jump()
+        private void playJumpSound()
         {
             if (!audio) return;
             audio.PlayOneShot(jumpSounds[Random.Range(0,jumpSounds.Length)]);
             //Debug.Log("play jumpSounds");
 
         }
+        private void playAttackSound()
+             {
+                 if (!audio) return;
+                 audio.PlayOneShot(attackSounds[Random.Range(0, attackSounds.Length)]);
+                 Debug.Log("play attack sound");
+             }
 
         private void OnTriggerEnter2D(Collider2D col)
         {
