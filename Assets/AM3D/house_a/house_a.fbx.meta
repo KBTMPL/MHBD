@@ -1,0 +1,240 @@
+fileFormatVersion: 2
+guid: e49426088198133704d339ff549ab750
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Default
+    100002: Default 1
+    100004: Default 10
+    100006: Default 11
+    100008: Default 12
+    100010: Default 13
+    100012: Default 14
+    100014: Default 15
+    100016: Default 16
+    100018: Default 17
+    100020: Default 18
+    100022: Default 2
+    100024: Default 3
+    100026: Default 4
+    100028: Default 5
+    100030: Default 6
+    100032: Default 7
+    100034: Default 8
+    100036: Default 9
+    100038: house00_low
+    100040: house01_low
+    100042: house02_low
+    100044: house03_low
+    100046: house04_low
+    100048: house05_low
+    100050: house06_low
+    100052: house07_low
+    100054: house08_low
+    100056: house09_low
+    100058: house10_low
+    100060: house11_low
+    100062: house12_low
+    100064: house13_low
+    100066: house14_low
+    100068: house15_low
+    100070: house16_low
+    100072: house17_low
+    100074: house18_low
+    100076: //RootNode
+    100078: house_a_low_01
+    100080: Main Camera
+    100082: Render
+    100084: Sky
+    400000: Default
+    400002: Default 1
+    400004: Default 10
+    400006: Default 11
+    400008: Default 12
+    400010: Default 13
+    400012: Default 14
+    400014: Default 15
+    400016: Default 16
+    400018: Default 17
+    400020: Default 18
+    400022: Default 2
+    400024: Default 3
+    400026: Default 4
+    400028: Default 5
+    400030: Default 6
+    400032: Default 7
+    400034: Default 8
+    400036: Default 9
+    400038: house00_low
+    400040: house01_low
+    400042: house02_low
+    400044: house03_low
+    400046: house04_low
+    400048: house05_low
+    400050: house06_low
+    400052: house07_low
+    400054: house08_low
+    400056: house09_low
+    400058: house10_low
+    400060: house11_low
+    400062: house12_low
+    400064: house13_low
+    400066: house14_low
+    400068: house15_low
+    400070: house16_low
+    400072: house17_low
+    400074: house18_low
+    400076: //RootNode
+    400078: house_a_low_01
+    400080: Main Camera
+    400082: Render
+    400084: Sky
+    2300000: house00_low
+    2300002: house01_low
+    2300004: house02_low
+    2300006: house03_low
+    2300008: house04_low
+    2300010: house05_low
+    2300012: house06_low
+    2300014: house07_low
+    2300016: house08_low
+    2300018: house09_low
+    2300020: house10_low
+    2300022: house11_low
+    2300024: house12_low
+    2300026: house13_low
+    2300028: house14_low
+    2300030: house15_low
+    2300032: house16_low
+    2300034: house17_low
+    2300036: house18_low
+    3300000: house00_low
+    3300002: house01_low
+    3300004: house02_low
+    3300006: house03_low
+    3300008: house04_low
+    3300010: house05_low
+    3300012: house06_low
+    3300014: house07_low
+    3300016: house08_low
+    3300018: house09_low
+    3300020: house10_low
+    3300022: house11_low
+    3300024: house12_low
+    3300026: house13_low
+    3300028: house14_low
+    3300030: house15_low
+    3300032: house16_low
+    3300034: house17_low
+    3300036: house18_low
+    4300000: house00_low
+    4300002: house01_low
+    4300004: house02_low
+    4300006: house03_low
+    4300008: house04_low
+    4300010: house05_low
+    4300012: house06_low
+    4300014: house07_low
+    4300016: house08_low
+    4300018: house09_low
+    4300020: house10_low
+    4300022: house11_low
+    4300024: house12_low
+    4300026: house13_low
+    4300028: house14_low
+    4300030: house15_low
+    4300032: house16_low
+    4300034: house17_low
+    4300036: house18_low
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Default
+    second: {fileID: 2100000, guid: 800a8a110c1e83e46ae4788692f52564, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

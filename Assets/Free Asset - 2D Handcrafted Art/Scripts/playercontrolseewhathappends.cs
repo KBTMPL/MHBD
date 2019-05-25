@@ -1,6 +1,8 @@
-﻿using UnityEngine;
-using Random = UnityEngine.Random;
+﻿using System.Collections;
 
+using UnityEngine;
+using Random = UnityEngine.Random;
+using Scripts;
 namespace Scripts
 {
    
@@ -10,21 +12,51 @@ namespace Scripts
         public float maxSpeed = 7;
         public float jumpTakeOffSpeed = 7;
         [SerializeField] private GameObject graphic;
+        
+        public Highscore highscore;
+        public SceneCounter sceneCounter = null;
+
+        
         [SerializeField] private bool jumping;
         [SerializeField] private AudioSource audio;
         [SerializeField] private AudioClip[] stepSounds;
         [SerializeField] private AudioClip[] jumpSounds;
         [SerializeField] private AudioClip[] attackSounds;
+        [SerializeField] private AudioClip[] gameOverSounds;
+        [SerializeField] private AudioClip[] perkSounds;
+        [SerializeField] private AudioClip[] winSounds;
+        [SerializeField] private AudioClip[] coinSounds;
         [SerializeField] private Animator animator;
         [SerializeField] private string name;
+        
         private AnimationClip attack_clip;
-        private float timeElapsed;
-        private float delayBeforeScene = 1f;
         public bool attack;
+        private bool canAttack = true;
         
         
 
-        
+
+        protected override void NewUpdate()
+        {
+            if (dead1 == 1)
+            {
+                PlayGameOverSound();
+            }
+            IfDeadThenGameOver();
+            IfGameIsFinished_UpdateHighscore();
+            
+        }
+
+        private void IfGameIsFinished_UpdateHighscore()
+        {
+            if (gamefinished)
+            {
+                highscore.time = sceneCounter.timer < highscore.time ? sceneCounter.timer : highscore.time;
+                
+            }
+        }
+
+
         protected override void ComputeVelocity()
         {
             Vector2 move = Vector2.zero;
@@ -45,26 +77,26 @@ namespace Scripts
         
             FlipCharacterDependOnDirection(move);
 
+
             if (animator)
             {
                 animator.SetBool ("grounded", grounded);
                 animator.SetFloat ("velocityX", Mathf.Abs (velocity.x) / maxSpeed);
-                if (dead == true)
-                {
-                    animator.SetBool("dead", true);
-                    timeElapsed += Time.deltaTime;
-                    
-                    if(timeElapsed >= delayBeforeScene)
-                        UnityEngine.SceneManagement.SceneManager.LoadScene("game_over");
-
-                }
+                
                    
             }
-
             targetVelocity = move * maxSpeed;
         
         }
 
+        private void IfDeadThenGameOver()
+        {
+            if (dead == true)
+            {
+                animator.SetBool("dead", true);
+                StartCoroutine(WaitForDeadAnimation());
+            }
+        }
 
         protected override void Attack()
         {
@@ -72,8 +104,9 @@ namespace Scripts
 
             if (animator){
                 animator.SetBool("attack",attack);
-                animator.speed = 2f; //xDDDDDD działa ale na wszystkie animacje
-                //animator.ge = 2f; 
+                
+                StartCoroutine(WaitForAnimation());
+
                 attack_clip = GetAnimationClip("Rogue_attack_01"); //to i ta funkcja i zmiennaasdfghjkl
                
 
@@ -152,7 +185,7 @@ namespace Scripts
         {
             if (!audio) return;
             audio.PlayOneShot(stepSounds[Random.Range(0,stepSounds.Length)]);
-            Debug.Log("play Footstep");
+            //Debug.Log("play Footstep");
 
         }
 
@@ -164,11 +197,16 @@ namespace Scripts
 
         }
         private void playAttackSound()
-             {
-                 if (!audio) return;
-                 audio.PlayOneShot(attackSounds[Random.Range(0, attackSounds.Length)]);
-                 Debug.Log("play attack sound");
-             }
+        {
+            if (!audio) return;
+            audio.PlayOneShot(attackSounds[Random.Range(0, attackSounds.Length)]);
+            //Debug.Log("play attack sound");
+        }
+        private void PlayGameOverSound()
+        {
+            if (!audio) return;
+            audio.PlayOneShot(gameOverSounds[Random.Range(0, gameOverSounds.Length)]);
+        }
 
         private void OnTriggerEnter2D(Collider2D col)
         {
@@ -183,6 +221,9 @@ namespace Scripts
 
             if (col.tag.Equals("healthPotion"))
             {
+                
+                PlayPerkSound();
+
                 if (healthAmount <= 0.6f)
                 {
                   healthAmount += 0.4f;  
@@ -194,12 +235,63 @@ namespace Scripts
                 
                 Destroy(col.gameObject);
             }
+
+            if (col.tag.Equals("coin"))
+            {
+                PlayCoinSound();
+                coin_amount++;
+                Destroy(col.gameObject);
+            }
+
+            if (col.tag.Equals("portal"))
+            {
+                gamefinished = true;
+                PlayWinSound();
+                StartCoroutine(WaitforGameFinishSound());
+            }
             
             
         }
 
+        private void PlayWinSound()
+        {
+            if (!audio) return;
+            audio.PlayOneShot(winSounds[Random.Range(0, winSounds.Length)]);
+        }
+
+        private void PlayCoinSound()
+        {
+            if (!audio) return;
+            audio.PlayOneShot(coinSounds[Random.Range(0, coinSounds.Length)]);
+        }
+
+        private  void PlayPerkSound()
+        {
+            if (!audio) return;
+            audio.PlayOneShot(perkSounds[Random.Range(0, perkSounds.Length)]);
+         }
+
+        private IEnumerator WaitForAnimation()
+        {
+            yield return new WaitForSeconds(1f);
+            //sceneLoader.LoadScene("Scores");
+            //Destroy(gameObject);
+        }
+
+        private IEnumerator WaitForDeadAnimation()
+        {
+            yield return new WaitForSeconds(1f);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("game_over");
+        }
+        private IEnumerator WaitforGameFinishSound()
+        {
+            yield return new WaitForSeconds(6f);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("game_over");
+        }
+        
 
     }
+
 }
 
 

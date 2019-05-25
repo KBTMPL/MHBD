@@ -7,7 +7,7 @@ public class PhysicsObject : MonoBehaviour {
 
     public float minGroundNormalY = .65f;
     public float gravityModifier = 1f;
-
+    public GameObject portal;
     protected Vector2 targetVelocity;
     protected bool grounded;
     protected Vector2 groundNormal;
@@ -17,8 +17,14 @@ public class PhysicsObject : MonoBehaviour {
     protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
     protected List<RaycastHit2D> hitBufferList = new List<RaycastHit2D> (16);
     protected bool dead;
+    protected int dead1;
+    protected bool gamefinished;
     [Range(0,1)]
     public static float healthAmount;
+
+    protected int coin_amount;
+    public int coins_on_scene;
+    private float fallZone = -10f;
 
 
     protected const float minMoveDistance = 0.001f;
@@ -32,6 +38,11 @@ public class PhysicsObject : MonoBehaviour {
 
     void Start ()
     {
+        portal.SetActive(false);
+        gamefinished = false;
+        coins_on_scene = 10;
+        coin_amount = 0;
+        dead1 = 0;
         healthAmount = 1f;
    //     healthBar.SetSize(1f);
         
@@ -43,29 +54,47 @@ public class PhysicsObject : MonoBehaviour {
     
     void Update () 
     {
-       
+        NewUpdate();
         targetVelocity = Vector2.zero;
-                ComputeVelocity (); 
-                Attack();
-                computeHealth();
-                healthBar.SetSize(healthAmount);
-        
-        
+        ComputeVelocity (); 
+        Attack();
+        computeHealth();
+        healthBar.SetSize(healthAmount);
+        if(transform.position.y < fallZone) //Assuming its a 2D game
+        {
+           //gamefinished = true;
+          
+           dead = true;
+           dead1++;
+           
+        }
+
+
+        IfAllCoinsCollectedOpenPortal();
+        //Debug.Log("monet :" + coin_amount);
+    }
+
+    private void IfAllCoinsCollectedOpenPortal()
+    {
+        if (coin_amount == coins_on_scene)
+        {
+            portal.SetActive(true);
+        }
     }
 
     protected virtual void computeHealth()
     {
         if (healthAmount < 0.3f)
         {
-            Debug.Log("masz mało życia");
+           // Debug.Log("masz mało życia");
            // healthBar.SetColor(Color.white);
         }
         if (healthAmount <= 0)
         {
             dead = true;        // zrób tak aby była animacja śmierci i ekran game over - powrót do menu
-            
-            
-           // Destroy(gameObject);
+            dead1++;
+
+            // Destroy(gameObject);
         }
         
     }
@@ -78,6 +107,7 @@ public class PhysicsObject : MonoBehaviour {
     {
     
     }
+    protected virtual void NewUpdate(){}
 
     void FixedUpdate()
     {
@@ -139,5 +169,5 @@ public class PhysicsObject : MonoBehaviour {
 
         rb2d.position = rb2d.position + move.normalized * distance;
     }
-
+    
 }

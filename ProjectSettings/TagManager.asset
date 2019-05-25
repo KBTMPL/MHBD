@@ -8,6 +8,9 @@ TagManager:
   - HealthBar
   - enemy
   - healthPotion
+  - coin
+  - Fire
+  - portal
   layers:
   - Default
   - TransparentFX
