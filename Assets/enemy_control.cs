@@ -94,7 +94,7 @@ public class enemy_control :   MonoBehaviour
 
     private void UpdateLiveOnBar()
     {
-        if (healthBar.gameObject != null)
+        if (healthBar != null)
         {
             healthBar.SetSize(healthAmount_after_hit / healthAmount);
         }
@@ -106,7 +106,11 @@ public class enemy_control :   MonoBehaviour
         {  
             dead++;
             playDeathSound();
-            Destroy(healthBar.gameObject);
+            if (healthBar != null)
+            {
+                Destroy(healthBar.gameObject); 
+            }
+
             //healthBar.GetComponent<Renderer>().enabled = false;
             if (animator)
             {

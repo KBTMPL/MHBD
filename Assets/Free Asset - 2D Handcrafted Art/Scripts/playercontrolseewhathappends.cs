@@ -214,7 +214,7 @@ namespace Scripts
             //if (GameObject.FindGameObjectWithTag("enemy") )
             if (col.tag.Equals("enemy") )
             {  
-                healthAmount -= 0.1f;
+                healthAmount -= 0.15f;
                // Debug.Log("masz mniej życia!");
             
             }
